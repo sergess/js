@@ -104,18 +104,12 @@ function getRandomInt(min, max) {
 		  return Math.floor(Math.random() * (max - min)) + min;
 }
 function collision(t){
-		//console.log(player.pos[0][0]);
 		t = enemy.pos;
 		for (var n = 0; n < enemy.pos.length; n++) {
 		if (Math.round(enemy.pos[n][0]) == Math.round(player.pos[0][0])){
 		return false;
 		} else{return true;}
-		} 
-		/* if (player.pos[0][0]<0 || player.pos[0][0] > canvasWidth - 18){
-		 	return false;
-		 } else{
-			 return true;
-			 }*/
+		}
 }
 function respawnNps(){
 		respNPS<20?respNPS++:respNPS=0;

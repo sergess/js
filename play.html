@@ -37,7 +37,7 @@ function Sprite(pos, size, move){
 	this.size=size;
 	this.pos=pos;
 	this.move=move;
-};
+}
 Sprite.prototype = {
 	draw: function (){
 		if (!collision()){
@@ -119,6 +119,31 @@ function respawnNps(){
 		
 }
 function update(){
+	if(respawnNps()){
+		switch (getRandomInt(0,4)) {
+			case 0:
+				enemy.pos.push([0, Math.random() * (canvasHeight - 21)]);
+				break;
+			case 1:
+				enemy.pos.push([Math.random() * canvasWidth, 0]);
+				break;
+			case 2:
+				enemy.pos.push([Math.random() * canvasWidth, canvasHeight- 21]);
+				break;
+			default:
+				enemy.pos.push([(canvasWidth-18), Math.random() * (canvasHeight - 21)]);
+				break;
+		}
+	}
+	for (var n = 0; n < enemy.pos.length; n++) {
+		var x0 = enemy.pos[n][0];
+		var y0 = enemy.pos[n][1];
+		var x1 = player.pos[0][0];
+		var y1 = player.pos[0][1];
+		var l = Math.sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0));
+		enemy.pos[n][0] += (x1 - x0) * 1/l;
+		enemy.pos[n][1] += (y1 - y0) * 1/l;
+	}
 	if (collision(enemy.pos)){
 	if(keydown.left) {
     dx = -1;
@@ -142,31 +167,7 @@ function update(){
 		dy = 0;
 		dx = 0;
 	}}
-	if(respawnNps()){	
-	switch (getRandomInt(0,4)) {
-    case 0:
-		enemy.pos.push([0, Math.random() * (canvasHeight - 21)]);
-    break;
-    case 1:
-		enemy.pos.push([Math.random() * canvasWidth, 0]);
-    break;
-    case 2:
-		enemy.pos.push([Math.random() * canvasWidth, canvasHeight- 21]);
-    break;
-    default:
-		enemy.pos.push([(canvasWidth-18), Math.random() * (canvasHeight - 21)]);
-    break;
-}
-}	
-for (var n = 0; n < enemy.pos.length; n++) {
-    var x0 = enemy.pos[n][0];
-    var y0 = enemy.pos[n][1];
-    var x1 = player.pos[0][0];
-    var y1 = player.pos[0][1];
-    var l = Math.sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0));
-    enemy.pos[n][0] += (x1 - x0) * 1/l;
-    enemy.pos[n][1] += (y1 - y0) * 1/l;
-}	
+
 }
 function drawFrame(){
 	ctx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -175,13 +176,13 @@ function drawFrame(){
 }
 player.shoot = function() {
   console.log("bomb");
-};
+}
 function startGame(){
 	console.log(enemy.pos[0][0] +' '+' '+player.pos[0][0]);
 }
-	var FPS = 10;
-	setInterval(function() {
-	//drawFrame();
+var FPS = 10;
+setInterval(function() {
+	drawFrame();
 	update ();
 	}, 1000/FPS);
 </script>

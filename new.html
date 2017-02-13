@@ -1,0 +1,206 @@
+<!doctype html>
+<html>
+<meta charset='utf-8'>
+<head>
+    <title>imgExample</title>
+    <script language="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript"></script>
+    <script language="javascript" src="javascripts/jquery.hotkeys.js" type="text/javascript"></script>
+    <script language="javascript" src="javascripts/key_status.js" type="text/javascript"></script>
+    <script language="javascript" src="js/utils.js" type="text/javascript"></script>
+    <script language="javascript" src="js/game.js" type="text/javascript"></script>
+    <script language="javascript" src="js/units.js" type="text/javascript"></script>
+    <script language="javascript" src="js/units_players.js" type="text/javascript"></script>
+    <script language="javascript" src="js/units_enemys.js" type="text/javascript"></script>
+    <style>
+        canvas {
+            /*border: 1px solid #000;
+            /*background:#e4faff;*/
+        }
+    </style>
+</head>
+<body>
+<p onClick="startGame()">2</p>
+<script language="javascript" src="js/web_game.js" type="text/javascript"></script>
+<script>
+   // console.log(computer.directionX());
+   // console.log(player.directionY());
+//Units.log();
+   function update(){
+       computer.moveenemy();
+   }
+   function drawFrame(){
+       ctx.clearRect(0, 0, Game.CANWASWIDTH, Game.CANWASHEIGHT);
+       computer.draw();
+   }
+   setInterval(function() {
+       /*drawFrame();*/
+       /*update ();*/
+   }, 1000/30);
+   /*if (keydown){
+   console.log(player.keypress());
+   }*/
+
+    //console.log(player.draw());
+//    player.draw();
+   // console.log(player.draw());
+  /*    var FPS = 10;
+    */
+
+
+
+
+
+
+
+    /*
+    function Sprite(pos, size, move){
+        this.size=size;
+        this.pos=pos;
+        this.move=move;
+    }
+    Sprite.prototype = {
+        draw: function (){
+            if (!collision()){
+                console.log('end');
+                x = this.move.dead[repeatStatanim()][0];
+                y = this.move.dead[repeatStatanim()][1];
+            } else{
+                if ((dx==0)&&(dy==0)){
+                    x = this.move.iddle[repeatStatanim()][0];
+                    y = this.move.iddle[repeatStatanim()][1];
+                }
+                if (dx==1){
+                    x = this.move.right[repeatStatanim()][0];
+                    y = this.move.right[repeatStatanim()][1];
+                } else if (dx==-1){
+                    x = this.move.left[repeatStatanim()][0];
+                    y = this.move.left[repeatStatanim()][1];
+                }
+                if (dy==1){
+                    x = this.move.bottom[repeatStatanim()][0];
+                    y = this.move.bottom[repeatStatanim()][1];
+                } else if (dy==-1){
+                    x = this.move.top[repeatStatanim()][0];
+                    y = this.move.top[repeatStatanim()][1];
+                }}
+            for (var a=0; a<this.pos.length; a++){
+                ctx.drawImage(image,
+                        x, y,
+                        this.size[0], this.size[1],
+                        this.pos[a][0], this.pos[a][1],
+                        this.size[0], this.size[1]);
+            }
+        }
+    };
+    var spritePlayer ={
+        pos: [[canvasWidth/2, canvasHeight/2]],
+        size: [18, 21],
+        move:{
+            iddle: [[0,0], [0,0], [0,0]],
+            left: [[30,0], [30,30], [30,60]],
+            right: [[90,0], [90,30], [90,60]],
+            bottom: [[0,0], [0,30], [0,60]],
+            top: [[60,0], [60,30], [60,60]],
+            dead:[[150,0],[150,0],[150,0]]
+        }
+    };
+    var spriteEnemy = {
+        pos: [[30, 0]],
+        size: [18, 21],
+        move:{
+            iddle: [[0,120], [30,120], [60,120]],
+            left: [[0,120], [30,120], [60,120]],
+            right: [[0,120], [30,120], [60,120]],
+            bottom: [[0,120], [30,120], [60,120]],
+            top: [[0,120], [30,120], [60,120]],
+            dead:[[90,120], [90,120], [90,120]]
+        }
+    };
+    var player = new Sprite(spritePlayer.pos, spritePlayer.size, spritePlayer.move);
+    var enemy = new Sprite(spriteEnemy.pos, spriteEnemy.size, spriteEnemy.move);
+
+    function collision(t){
+        t = enemy.pos;
+        for (var n = 0; n < enemy.pos.length; n++) {
+            if (Math.round(enemy.pos[n][0]) == Math.round(player.pos[0][0])){
+                return false;
+            } else{return true;}
+        }
+    }
+    function respawnNps(){
+        respNPS<20?respNPS++:respNPS=0;
+        if(respNPS==1){
+            return true;
+        } else{return false;}
+
+    }
+    function update(){
+        if(respawnNps()){
+            switch (getRandomInt(0,4)) {
+                case 0:
+                    enemy.pos.push([0, Math.random() * (canvasHeight - 21)]);
+                    break;
+                case 1:
+                    enemy.pos.push([Math.random() * canvasWidth, 0]);
+                    break;
+                case 2:
+                    enemy.pos.push([Math.random() * canvasWidth, canvasHeight- 21]);
+                    break;
+                default:
+                    enemy.pos.push([(canvasWidth-18), Math.random() * (canvasHeight - 21)]);
+                    break;
+            }
+        }
+        for (var n = 0; n < enemy.pos.length; n++) {
+            var x0 = enemy.pos[n][0];
+            var y0 = enemy.pos[n][1];
+            var x1 = player.pos[0][0];
+            var y1 = player.pos[0][1];
+            var l = Math.sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0));
+            enemy.pos[n][0] += (x1 - x0) * 1/l;
+            enemy.pos[n][1] += (y1 - y0) * 1/l;
+        }
+        if (collision(enemy.pos)){
+            if(keydown.left) {
+                dx = -1;
+                player.pos[0][0] += dx*4;
+            } else
+            if(keydown.right) {
+                dx = 1;
+                player.pos[0][0] += dx*4;
+            }else
+            if (keydown.up){
+                dy = -1;
+                player.pos[0][1] += dy*4;
+            }else
+            if (keydown.down){
+                dy = 1;
+                player.pos[0][1] += dy*4;
+            } else if(keydown.space) {
+                player.shoot();
+            }
+            else {
+                dy = 0;
+                dx = 0;
+            }}
+
+
+    function drawFrame(){
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        enemy.draw();
+        player.draw();
+    }
+    player.shoot = function() {
+        console.log("bomb");
+    }
+    function startGame(){
+        console.log(enemy.pos[0][0] +' '+' '+player.pos[0][0]);
+    }
+    var FPS = 10;
+    setInterval(function() {
+        drawFrame();
+        update ();
+    }, 1000/FPS);}*/
+</script>
+</body>
+</html>

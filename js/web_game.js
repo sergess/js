@@ -17,7 +17,7 @@ let playerOne = {
 	}
 };
 let computerObj = {
-	pos:  [[30, 0]],
+	pos:  [],
 	size: [18, 21],
 	move: {
 		iddle:  [[0, 120], [30, 120], [60, 120]],
@@ -31,7 +31,7 @@ let computerObj = {
 let computer = new UnitsEnemy(computerObj);
 let player = new UnitsPlayers(playerOne);
 let game = new Game();
-setInterval(function () {
+/*setInterval(function () {
 	computer.draw();
 	player.draw();
-}, 1000 / Game.FPS);
+}, 1000 / Game.FPS);*/

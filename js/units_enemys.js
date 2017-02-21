@@ -1,18 +1,21 @@
 'use strict';
 class UnitsEnemy extends Units {
+
 	moveenemy() {
+		// computer.pos.push([10, Math.random() * (Game.CANWASHEIGHT - 21)]);
+		console.log();
 		switch (Utils.getRandomInt(0, 4)) {
 			case 0:
-				computer.pos.push([0, Math.random() * (Game.CANWASHEIGHT - 21)]);
+				computerObj.pos.push([10, Math.floor(Math.random() * (Game.CANWASHEIGHT - 21))]);
 				break;
 			case 1:
-				computer.pos.push([Math.random() * Game.CANWASWIDTH, 0]);
+				computerObj.pos.push([Math.floor(Math.random() * Game.CANWASWIDTH), 0]);
 				break;
 			case 2:
-				computer.pos.push([Math.random() * Game.CANWASWIDTH, Game.CANWASHEIGHT - 21]);
+				computerObj.pos.push([Math.floor(Math.random() * Game.CANWASWIDTH), Game.CANWASHEIGHT - 21]);
 				break;
 			default:
-				computer.pos.push([(Game.CANWASWIDTH - 18), Math.random() * (Game.CANWASHEIGHT - 21)]);
+				computerObj.pos.push([(Game.CANWASWIDTH - 18), Math.floor(Math.random() * (Game.CANWASHEIGHT - 21))]);
 				break;
 		}
 		for (let n = 0; n < computer.pos.length; n++) {
@@ -23,7 +26,8 @@ class UnitsEnemy extends Units {
 			let l = Math.sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0));
 			computer.pos[n][0] += (x1 - x0) * 1/l;
 			computer.pos[n][1] += (y1 - y0) * 1/l;
+		 //console.log('rand: '+Utils.getRandomInt(0, 4)+'test: '+computerObj.pos[n][1]);
 		}
-		console.log(computer.pos);
+
 	}
 }

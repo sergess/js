@@ -2,7 +2,7 @@
 class UnitsEnemy extends Units {
 
 	moveenemy() {
-		// computer.pos.push([10, Math.random() * (Game.CANWASHEIGHT - 21)]);
+		// computer.pos.push([10, Math.random() * (Game.CANWASHEIGHT - 21)]);1
 		console.log();
 		switch (Utils.getRandomInt(0, 4)) {
 			case 0:
